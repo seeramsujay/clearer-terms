@@ -1,2 +1,5 @@
 Archives/*
 node_modules/*
+
+__pycache__/
+*.pyc
