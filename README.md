@@ -1,12 +1,32 @@
-# TrapSight 👁️🔍
+<p align="center">
+  <img src="assets/logo.svg" alt="TrapSight Logo" width="220" />
+</p>
 
-> **TrapSight** is a premium, AI-powered Chrome extension designed to expose hidden traps, fine print, and deceptive pricing details in checkout forms. By intercepting the checkout flow, extracting pricing agreements, and analyzing them via the Gemini 1.5 Flash API, TrapSight translates complex legal jargon and subscription traps into simple, clear mathematics before the user completes their purchase.
+<h1 align="center">TrapSight (Clearer-Terms)</h1>
+
+<p align="center">
+  <strong>AI-Powered Chrome Extension Exposing Fine-Print Traps, Auto-Renewal Gotchas, and Deceptive Checkout Pricing.</strong>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Platform-Chrome_Extension_MV3-4285F4.svg?style=flat-square&logo=googlechrome" alt="Chrome MV3">
+  <img src="https://img.shields.io/badge/AI_Engine-Gemini_1.5_Flash-8E75C2.svg?style=flat-square&logo=google" alt="Gemini 1.5 Flash">
+  <img src="https://img.shields.io/badge/Language-JavaScript-F7DF1E.svg?style=flat-square&logo=javascript" alt="JavaScript">
+  <img src="https://img.shields.io/badge/Focus-Consumer_Protection-10B981.svg?style=flat-square" alt="Consumer Protection">
+  <a href="future.md"><img src="https://img.shields.io/badge/roadmap-future.md-blueviolet.svg?style=flat-square" alt="Roadmap"></a>
+</p>
+
+---
+
+## ⚡ Overview
+
+**TrapSight** is a premium, AI-powered Chrome extension designed to expose hidden traps, fine print, and deceptive pricing details in checkout forms. By intercepting the checkout flow, extracting pricing agreements, and analyzing them via the Gemini 1.5 Flash API, TrapSight translates complex legal jargon and subscription traps into simple, clear mathematics before the user completes their purchase.
 
 ---
 
 ## 🏗️ Project Architecture & Data Flow
 
-TrapSight is divided into four modular components, collaborated on by four development roles:
+TrapSight is divided into four modular components collaborating seamlessly:
 
 ```mermaid
 graph TD
@@ -28,38 +48,23 @@ graph TD
 
 ## 👥 Development Roles & Responsibilities
 
-### 🎯 Member 2: DOM Targeting (The Scraper) — *Your Role*
-As the scraper developer, you are responsible for safely and precisely extracting pricing text from the page. Your code lives within the extension's content execution environment and must satisfy:
-*   **Scope Restriction**: Limit scraping actions *exclusively* to the 3 target demo websites.
-*   **Extraction Accuracy**: Write optimized CSS selectors to extract only the pricing terms and summary containers (e.g., `document.querySelector('.checkout-summary').innerText`), avoiding unnecessary DOM noise.
-*   **Routing Logic**: Implement a clean `switch` statement or routing map matching the URL (`window.location.href`) to run the correct scraper.
-*   **Deliverable**: A modular, exportable JavaScript function (e.g., `scrapeCheckoutData()`) that can be executed dynamically by Member 4.
-
-> [!TIP]
-> Keep selectors robust by targeting IDs or semantic wrapper classes (like `.checkout-summary`, `#cart-total`, `.subscription-details`) to prevent minor UI changes from breaking the scraper.
-
----
+### 🎯 Member 2: DOM Targeting (The Scraper)
+*   **Scope Restriction**: Limit scraping actions *exclusively* to demo and targeted checkout flows.
+*   **Extraction Accuracy**: Write optimized CSS selectors to extract only pricing terms and summary containers (e.g., `document.querySelector('.checkout-summary').innerText`), avoiding unnecessary DOM noise.
+*   **Routing Logic**: Implement clean routing maps matching the URL (`window.location.href`) to run the correct scraper.
 
 ### 🧠 Member 1: Background Script & AI Engine
 *   **Setup**: Registers the service worker in `manifest.json`.
-*   **API Connection**: Integrates the Gemini 1.5 Flash API directly using the local free-tier key.
-*   **Prompting**: Implements a strict system prompt instructing the LLM to output a predictable JSON schema.
-*   **Routing**: Receives scraped text from Member 4, calls the Gemini API, and passes back the JSON response.
-
----
+*   **API Connection**: Integrates Gemini 1.5 Flash API directly using the local API key.
+*   **Prompting**: Implements a strict system prompt instructing the LLM to output predictable JSON schemas.
 
 ### 🎨 Member 3: UI/UX (The Alert Widget)
-*   **Independent Build**: Builds the premium alert widget using a hardcoded JSON contract (simulating the Gemini response).
-*   **Widget Design**: Implements a premium, page-freezing alert widget that renders legal jargon as simple mathematical operations.
-*   **Action Logic**: Handles the "Read" button, scrolling the user to the highlighted target selector.
-*   **Deliverable**: Modular CSS styles and injection-ready HTML/JS components.
-
----
+*   **Widget Design**: Implements a page-freezing alert widget that renders legal jargon as simple mathematical operations.
+*   **Action Logic**: Handles the "Read" button, scrolling the user directly to the highlighted target selector.
 
 ### 🔌 Member 4: Content Script & Integration
 *   **Interception**: Listens to checkout or proceed buttons and calls `event.preventDefault()` to pause navigation.
-*   **Data Pipeline**: Runs Member 2's scraper, manages the message port to send data to Member 1, and handles loading states.
-*   **Rendering**: Receives the analysis JSON and mounts Member 3's UI widget to display the results.
+*   **Data Pipeline**: Manages the message port between content script and background service worker.
 
 ---
 
@@ -79,7 +84,8 @@ As the scraper developer, you are responsible for safely and precisely extractin
 ---
 
 ## 📋 JSON Contract Specification
-The Gemini API response processed by the background worker conforms to the following structure, which both the Scraper and the UI widget align with:
+
+The Gemini API response processed by the background worker conforms to the following structure:
 
 ```json
 {
@@ -107,3 +113,15 @@ The Gemini API response processed by the background worker conforms to the follo
   ]
 }
 ```
+
+---
+
+## 🔮 Engineering Roadmap
+
+To explore planned features including universal heuristic DOM scraping, FTC dark pattern classification, and on-device WebLLM inference, read [future.md](future.md).
+
+---
+
+## 📄 License
+
+Distributed under the MIT License.

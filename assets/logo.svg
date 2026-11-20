@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090E17" />
+      <stop offset="50%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#05080E" />
+    </linearGradient>
+
+    <!-- Sight / Shield Gradient -->
+    <linearGradient id="sight-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4" />
+      <stop offset="50%" stop-color="#3B82F6" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+
+    <!-- Trap Warning Gradient -->
+    <linearGradient id="warning-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#EF4444" />
+    </linearGradient>
+
+    <linearGradient id="core-glow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.05" />
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="subtle-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="800" rx="160" fill="url(#bg-grad)" />
+  <rect width="796" height="796" x="2" y="2" rx="158" fill="none" stroke="#1E293B" stroke-width="2" />
+
+  <!-- Scanning Reticle & Fine-Print Lines -->
+  <g opacity="0.15" stroke="#38BDF8" stroke-width="1.5">
+    <circle cx="400" cy="380" r="140" fill="none" stroke-dasharray="6 6" />
+    <circle cx="400" cy="380" r="230" fill="none" stroke-dasharray="8 8" />
+    <!-- Fine-print text line representations -->
+    <line x1="260" y1="260" x2="540" y2="260" stroke-dasharray="8 4" />
+    <line x1="280" y1="290" x2="520" y2="290" stroke-dasharray="12 4" />
+    <line x1="260" y1="470" x2="540" y2="470" stroke-dasharray="6 4" />
+    <line x1="300" y1="500" x2="500" y2="500" stroke-dasharray="10 4" />
+  </g>
+
+  <!-- Central TrapSight Aperture / Eye & Lens Geometry -->
+  <!-- Outer Inspection Lens -->
+  <circle cx="400" cy="380" r="160" fill="url(#core-glow)" stroke="url(#sight-grad)" stroke-width="8" filter="url(#glow)" />
+
+  <!-- Intercepting Diagonal Scanner Beam -->
+  <line x1="220" y1="200" x2="580" y2="560" stroke="#06B6D4" stroke-width="3" stroke-dasharray="6 8" opacity="0.6" />
+
+  <!-- Stylized Eye Aperture -->
+  <path d="M 270 380 Q 400 270, 530 380 Q 400 490, 270 380 Z" fill="#0B132B" stroke="#38BDF8" stroke-width="5" stroke-linejoin="round" />
+
+  <!-- Central Pupil / Lens Iris -->
+  <circle cx="400" cy="380" r="50" fill="#111827" stroke="url(#warning-grad)" stroke-width="4" filter="url(#subtle-glow)" />
+
+  <!-- Hidden Trap Warning Emblem inside Iris -->
+  <path d="M 400 355 L 418 395 L 382 395 Z" fill="url(#warning-grad)" />
+  <circle cx="400" cy="378" r="2" fill="#F8FAFC" />
+  <circle cx="400" cy="386" r="2" fill="#F8FAFC" />
+
+  <!-- Magnifying Diagnostic Crosshairs -->
+  <g stroke="#10B981" stroke-width="3" stroke-linecap="round">
+    <line x1="400" y1="310" x2="400" y2="330" />
+    <line x1="400" y1="430" x2="400" y2="450" />
+    <line x1="330" y1="380" x2="350" y2="380" />
+    <line x1="450" y1="380" x2="470" y2="380" />
+  </g>
+
+  <!-- Typography -->
+  <text x="400" y="680" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="#F8FAFC" letter-spacing="4">
+    TRAP<tspan fill="#06B6D4">SIGHT</tspan>
+  </text>
+  <text x="400" y="718" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#94A3B8" letter-spacing="3">
+    AI FINE-PRINT &amp; PRICING AUDITOR
+  </text>
+</svg>
